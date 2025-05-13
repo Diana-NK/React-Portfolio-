@@ -1,26 +1,24 @@
-import { useNavigate, useLocation, Link } from "react-router-dom";
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import logo from '../images/logo.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
-
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
   const goToProjects = () => {
-    if (location.pathname !== "/") {
-      navigate("/", { replace: false });
+    if (location.pathname !== '/') {
+      navigate('/', { replace: false });
       setTimeout(() => {
-        document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
+        document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
       }, 100);
     } else {
-      document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
+      document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
     }
   };
-
   return (
     <header>
       <div className="container-fluid py-2 px-3 d-flex justify-content-between align-items-center" style={{ backgroundColor: '#08002e' }}>
