@@ -48,7 +48,9 @@ a:active {
 
 header {
   border-bottom: 1px solid #00d8fe49;
-  box-shadow: 0 0 4px 0 #00d8fe49, 0 6px 18px 0 #00d8fe49;
+  box-shadow:
+    0 0 4px 0 #00d8fe49,
+    0 6px 18px 0 #00d8fe49;
   padding-top: 1rem;
   padding-bottom: 1rem;
   margin-bottom: 1rem;
@@ -64,7 +66,7 @@ header {
 
 @media (max-width: 768px) {
   .responsive-img {
-    width: 100%;/*Adjust size for smaller screens */
+    width: 100%; /*Adjust size for smaller screens */
   }
 }
 
@@ -110,9 +112,8 @@ header {
   color: #00d8fe !important;
   transition: color 0.3s ease;
 }
-.text-close{
-  background-color:#00d8fe !important;
-  
+.text-close {
+  background-color: #00d8fe !important;
 }
 /* On hover, change the color to white */
 .nav-link.text-blue:hover {
@@ -127,11 +128,9 @@ header {
 .offcanvas .nav-link.text-blue:hover {
   color: white !important;
 }
-.offcanvas-body{
+.offcanvas-body {
   background-color: #08002e;
 }
-
-
 
 @media (max-width: 768px) {
   .container-list ul {
@@ -248,19 +247,20 @@ footer {
 }
 
 /* Gradient Background */
-.gradient-bg{
+.gradient-bg {
   background: linear-gradient(to right, #0a003c, #00d8fe);
   padding: 1rem 2rem;
   border-radius: 10px;
   color: #fff;
 }
 
-
 /* Card Item */
 .card-item {
   border-radius: 10px;
   border: 1px solid #00d8fe;
-  box-shadow: 0 0 2px 0 #00d8fe3f, 0 6px 6px 1px #00d8fe3f;
+  box-shadow:
+    0 0 2px 0 #00d8fe3f,
+    0 6px 6px 1px #00d8fe3f;
   color: #00d8fe;
   overflow: hidden;
 }
@@ -288,7 +288,9 @@ footer {
   padding: 1rem; /* Shortened padding shorthand */
   border-radius: 16px;
   border: 1px solid #00d8fe;
-  box-shadow: 0 0 2px 0 #00d8fe, 0 3px 3px 0 #00d8fe;
+  box-shadow:
+    0 0 2px 0 #00d8fe,
+    0 3px 3px 0 #00d8fe;
   color: #00d8fe;
   flex-wrap: wrap; /* Allow wrapping for responsiveness */
   justify-content: space-between; /* Center tabs in the container */
@@ -317,7 +319,9 @@ input[type='radio'] {
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
-  box-shadow: 0 0 2px 0 #00d8fe44, 0 6px 12px 0 #00d8fe45;
+  box-shadow:
+    0 0 2px 0 #00d8fe44,
+    0 6px 12px 0 #00d8fe45;
   text-align: center;
 }
 
