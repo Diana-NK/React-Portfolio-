@@ -7,6 +7,12 @@ import diaryapp from '../images/DiarryApp2.jpg';
 
 export const cardData = [
   {
+    title: 'Little Lemon Restaurant',
+    text: 'Restaurant with options for booking a table and ordering a food delivery',
+    imgUrl: littlelemon, // Image URL
+    link: 'https://diana-nk.github.io/my-little-lemon/',
+  },
+  {
     title: 'Tic-Tac-Toe',
     text: 'React project that recreates the very popular game Tic-Tac-Toe',
     imgUrl: tictactoeImage, // Image URL
@@ -18,12 +24,6 @@ export const cardData = [
     text: 'Application for organizing tasks and managing them.',
     imgUrl: taskmanager, // Image URL
     link: 'https://diana-nk.github.io/Task-Manager/',
-  },
-  {
-    title: 'Little Lemon Restaurant',
-    text: 'Restaurant with options for booking a table and ordering a food delivery',
-    imgUrl: littlelemon, // Image URL
-    link: 'https://diana-nk.github.io/my-little-lemon/',
   },
   {
     title: 'Expense Tracker',
