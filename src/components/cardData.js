@@ -1,5 +1,5 @@
 // data.js
-import tictactoeImage from '../images/tictactoe.jpeg';
+import tictactoeImage from '../images/tictactoe-new.png';
 import taskmanager from '../images/taskmanager.jpeg';
 import littlelemon from '..//images/third-project.jpeg';
 import expencetracker from '../images/expencetracker.png';

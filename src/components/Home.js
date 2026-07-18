@@ -1,113 +1,85 @@
-import profile from '../images/profile.png';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
-import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import Tabs from './Tabs';
 import Card from './Card';
-import ArrowComponent from './ArrowComponent';
+import deskImage from '../images/developer-workspace.png';
 import reactimg from '../images/science.png';
 import cimg from '../images/c-.png';
-import pythonimg from '../images/python.png';
-import htmlimg from '../images/html.png';
-import cssimg from '../images/css.png';
 import bootstrapimg from '../images/bootstrap.png';
 import figmaimg from '../images/figma.png';
 import dotnetimg from '../images/social.png';
 import jsimg from '../images/js.png';
+import { FiArrowRight, FiGithub, FiLinkedin, FiMail, FiUser } from 'react-icons/fi';
+import { SiTailwindcss, SiTypescript } from 'react-icons/si';
+import { FaDatabase } from 'react-icons/fa';
+
+const skills = [
+  { name: 'TypeScript', Icon: SiTypescript, color: '#3178c6' },
+  { name: 'Tailwind', Icon: SiTailwindcss, color: '#38bdf8' },
+  { name: 'SQL', Icon: FaDatabase, color: '#00d8fe' },
+  { name: 'Bootstrap', image: bootstrapimg },
+  { name: 'Figma', image: figmaimg }, { name: 'JavaScript', image: jsimg },
+  { name: 'React', image: reactimg }, { name: 'C#', image: cimg },
+  { name: '.NET', image: dotnetimg },
+];
 
 const Home = () => {
-  const scrollToProjects = () => {
-    document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const imgIcons = {
-    html: htmlimg,
-    css: cssimg,
-    bootstrap: bootstrapimg,
-    figma: figmaimg,
-    js: jsimg,
-    react: reactimg,
-    puthon: pythonimg,
-    cimg: cimg,
-    dotnet: dotnetimg,
-  };
+  const scrollToProjects = () => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
 
   return (
-    <div className="container-body">
-      <section className="full-screen-section">
-        <div className="container d-flex justify-content-center mt-5">
-          <div className="m-3" style={{ width: '45%' }}>
-            <img
-              src={profile}
-              alt="Profile"
-              className="img-fluid responsive-img rounded-circle shadow"
-            />
+    <main className="home-page">
+      <section className="hero-section">
+        <div className="hero-photo-panel">
+          <img src={deskImage} alt="Developer workspace with laptop, desk lamp and notebook" />
+          <div className="availability-card">
+            <span className="status-dot" />
+            <div><strong>Available for opportunities</strong><small>Let's build something amazing</small></div>
+            <Link to="/contact" aria-label="Contact me"><FiArrowRight /></Link>
           </div>
-          <div className="mt-5 ms-5">
-            <div className="gradient-bg p-3 mb-4 px-5 ps-2 d-inline-flex bg-info bg-opacity-10 border border-2 border-info border-start-0 rounded-end-2 text-light">
-              Welcome to my Portfolio!
-            </div>
-            <h3 className="mt-3 mb-3 fs-2 text">
-              I am future
-              <span style={{ color: '#00d8fe' }}> FullStack</span> developer
-            </h3>
-            <p>
-              As a person I am positive and career oriented. I am interested in
-              the new technologies and trends in coding. I love changes and
-              trying new and exciting things that help me evolve professionally.
-            </p>
-            <p className="mt-3">
-              {Object.values(imgIcons).map((icon, index) => (
-                <span key={index}>
-                  <span style={{ color: '#00d8fe' }}>⋮</span>{' '}
-                  <img
-                    src={icon}
-                    alt={`icon-${index}`}
-                    style={{
-                      width: '30px',
-                      height: '30px',
-                      marginRight: '10px',
-                      marginTop: '10px',
-                    }}
-                  />
-                </span>
-              ))}
-              <span style={{ color: '#00d8fe' }}>⋮</span>
-            </p>
-            <ButtonToolbar>
-              <Link to="/about">
-                <Button
-                  className="mt-2 mb-3 btn_second"
-                  style={{ whiteSpace: 'nowrap' }}
-                >
-                  About Me
-                </Button>
-              </Link>
-            </ButtonToolbar>
+          <div className="social-links">
+            <a href="https://github.com/Diana-NK" target="_blank" rel="noreferrer" aria-label="GitHub"><FiGithub /></a>
+            <a href="https://www.linkedin.com/in/diana-kaloyancheva-898832127/" target="_blank" rel="noreferrer" aria-label="LinkedIn"><FiLinkedin /></a>
+            <Link to="/contact" aria-label="Email"><FiMail /></Link>
           </div>
         </div>
-        <button className="scroll-button" onClick={scrollToProjects}>
-          <ArrowComponent />
-        </button>
+
+        <div className="hero-content">
+          <div className="welcome-pill"><span className="waving-hand">👋</span> Welcome to <em>my Portfolio!</em></div>
+          <h1>I am <span>FullStack</span> developer</h1>
+          <div className="title-rule" />
+          <p className="hero-intro">As a person I am positive and career oriented. I am interested in the new technologies and trends in coding. I love changes and trying new and exciting things that help me evolve professionally.</p>
+
+          <div className="skills-strip" id="skills">
+            {skills.map(({ name, image, Icon, color }, index) => (
+              <React.Fragment key={name}>
+                <div className="skill-item">
+                  {Icon ? <Icon aria-hidden="true" style={{ color }} /> : <img src={image} alt="" />}
+                  <span>{name}</span>
+                </div>
+                {index < skills.length - 1 && <i />}
+              </React.Fragment>
+            ))}
+          </div>
+
+          <div className="hero-actions">
+            <Link className="primary-action" to="/about"><FiUser /> About Me <FiArrowRight /></Link>
+          </div>
+
+          <button className="scroll-cue" onClick={scrollToProjects} aria-label="Scroll to projects">
+            <span><i /><i /></span><small>Scroll Down</small><b>⌄</b>
+          </button>
+        </div>
       </section>
 
-      <section id="projects" className="full-screen-section">
+      <section id="projects" className="full-screen-section projects-section">
         <div className="container flex-column justify-content-center">
           <h3 className="mt-5 pt-3 mb-3 fs-2 text">Projects</h3>
-          <p className="text-center" style={{ color: '#00d8fe' }}>
-            Below are some of the projects I've developed using HTML, CSS,
-            Bootstrap, JavaScript, React, and Tailwind CSS. These projects
-            showcase my skills in front-end development, responsive design, and
-            modern web technologies.
-          </p>
+          <p className="text-center projects-intro">Below are some of the projects I've developed using HTML, CSS, Bootstrap, JavaScript, React, and Tailwind CSS.</p>
         </div>
         <Tabs />
-        <div className="container flex-row justify-content-center">
-          <Card />
-        </div>
+        <div className="container flex-row justify-content-center"><Card /></div>
       </section>
-    </div>
+    </main>
   );
 };
 

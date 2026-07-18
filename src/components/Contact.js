@@ -1,125 +1,55 @@
-import React from 'react';
-import { useState } from 'react';
-import call from '../images/call.png';
+import React, { useState } from 'react';
 import Modal from './Modal';
 import callperson from '../images/callperson.png';
+import { FiArrowRight, FiCalendar, FiMail, FiMapPin, FiPhone, FiSend } from 'react-icons/fi';
 
 const Contact = () => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
-  const [submit, setSubmit] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const [message, setMessage] = useState('');
   const [open, setOpen] = useState(false);
+  const valid = name && email && message;
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    setSubmit(true);
+    setSubmitted(true);
   };
 
   return (
-    <div className="container-body">
-      <div class="container d-flex justify-content-around pt-5 pb-5 align-items-start">
-        <form onSubmit={handleSubmit} className="col-sm-4">
-          <div className="form-group">
-            <label className="form-label mt-3" style={{ color: '#00d8fe' }}>
-              Name
-            </label>
-            <input
-              className="form-control mb-2"
-              type="name"
-              placeholder="Enter your name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            ></input>
-            {submit && !name ? (
-              <span className="text-danger mb-2">Please enter your name!</span>
-            ) : null}
+    <main className="inner-page contact-page">
+      <section className="page-heading">
+        <span className="eyebrow">Let’s work together</span>
+        <h1>Have an idea? <em>Let’s talk.</em></h1>
+        <p>Whether you have a project in mind or simply want to connect, I’d love to hear from you.</p>
+      </section>
+
+      <section className="contact-layout">
+        <form onSubmit={handleSubmit} className="contact-form" noValidate>
+          <div className="form-heading"><span><FiSend /></span><div><small>Send a message</small><h2>Tell me about your project</h2></div></div>
+          <div className="field-row">
+            <label>Name<input type="text" placeholder="Your name" value={name} onChange={(e) => setName(e.target.value)} />{submitted && !name && <small>Please enter your name.</small>}</label>
+            <label>Email<input type="email" placeholder="you@email.com" value={email} onChange={(e) => setEmail(e.target.value)} />{submitted && !email && <small>Please enter your email.</small>}</label>
           </div>
-          <div className="form-group mb-3 ">
-            <label className="form-label " style={{ color: '#00d8fe' }}>
-              Email
-            </label>
-            <input
-              className="form-control mb-2"
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            ></input>
-            {submit && !email ? (
-              <span className="text-danger mb-2">Please enter your email!</span>
-            ) : null}
-          </div>
-          <div className="form-group mb-3 ">
-            <label
-              className="form-label"
-              style={{ color: '#00d8fe' }}
-              for="floatingTextarea"
-            >
-              Message
-            </label>
-            <textarea
-              class="form-control"
-              value={message}
-              placeholder="Message ..."
-              style={{ height: '150px' }}
-              onChange={(e) => setMessage(e.target.value)}
-            ></textarea>
-            {submit && !message ? (
-              <span className="text-danger mb-3">Please write a message!</span>
-            ) : null}
-          </div>
-          <button
-            className="btn mt-3 text-white"
-            style={{ backgroundColor: '#00d8fe' }}
-          >
-            Submit
-          </button>
-          {email && name && submit && message ? (
-            <div className="textArea text-white mt-3 p-3 text-center">
-              Thank you for your message! <br />
-              Name: {name} <br />
-              Email: {email} <br />
-              Your Message: <br />
-              {message}
-            </div>
-          ) : null}
+          <label>Message<textarea value={message} placeholder="Tell me what you would like to build..." onChange={(e) => setMessage(e.target.value)} />{submitted && !message && <small>Please write a message.</small>}</label>
+          <button className="form-submit" type="submit">Send Message <FiArrowRight /></button>
+          {submitted && valid && <div className="success-message">Thanks, {name}! Your message is ready to send.</div>}
         </form>
 
-        <div className="col-sm-4 text-center">
-          {open && (
-            <Modal close={() => setOpen(false)}>
-              <h2 style={{ backgroundColor: '#fff', margin: '2rem' }}>
-                You booked a call!
-              </h2>
-              <img
-                src={callperson}
-                style={{ width: '250px', backgroundColor: '#fff' }}
-              />
-            </Modal>
-          )}
-          <div>
-            <img
-              src={call}
-              alt="call"
-              style={{
-                width: '225px',
-                marginBottom: '75px',
-                marginTop: '75px',
-              }}
-            ></img>
+        <aside className="contact-aside">
+          <div className="contact-details">
+            <span className="eyebrow">Contact details</span>
+            <a href="mailto:diana.kaloyancheva@gmail.com"><FiMail /><span><small>Email</small>diana.kaloyancheva@gmail.com</span></a>
+            <a href="tel:+46729757042"><FiPhone /><span><small>Phone</small>072 975 70 42</span></a>
+            <div><FiMapPin /><span><small>Location</small>Jönköping, Sweden</span></div>
           </div>
-          <div>
-            <button
-              onClick={() => setOpen(true)}
-              className="btn mt-3 text-white"
-              style={{ backgroundColor: '#00d8fe' }}
-            >
-              Book a Call!
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+          <div className="call-card"><FiCalendar /><h3>Prefer a conversation?</h3><p>Book a call and let’s discuss your ideas.</p><button onClick={() => setOpen(true)}>Book a Call <FiArrowRight /></button></div>
+        </aside>
+      </section>
+
+      {open && <Modal close={() => setOpen(false)}><div className="modal-message"><img src={callperson} alt="Person confirming a booked call" /><h2>Your call is booked!</h2><p>I look forward to speaking with you.</p></div></Modal>}
+    </main>
   );
 };
+
 export default Contact;

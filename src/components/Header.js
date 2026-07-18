@@ -1,129 +1,54 @@
-import { useNavigate, useLocation, Link } from 'react-router-dom';
-import logo from '../images/logo.png';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
+import logo from '../images/logo-dk-final.png';
+import { FiDownload, FiMenu, FiX } from 'react-icons/fi';
+import { useState } from 'react';
 
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  const goToProjects = () => {
+  const scrollHomeSection = (id) => {
+    setMenuOpen(false);
     if (location.pathname !== '/') {
-      navigate('/', { replace: false });
-      setTimeout(() => {
-        document
-          .getElementById('projects')
-          ?.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
-    } else {
-      document
-        .getElementById('projects')
-        ?.scrollIntoView({ behavior: 'smooth' });
+      navigate('/');
+      setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }), 120);
+      return;
     }
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <header>
-      <div
-        className="container-fluid py-2 px-3 d-flex justify-content-between align-items-center"
-        style={{ backgroundColor: '#08002e' }}
-      >
-        <img src={logo} alt="Logo" height={80} width={100} />
+    <header className="site-header">
+      <nav className="main-nav" aria-label="Main navigation">
+        <Link to="/" className="brand" aria-label="Diana Todorova home">
+          <img src={logo} alt="DT" />
+        </Link>
 
         <button
-          style={{ width: '50px', height: '50px' }}
-          className="btn btn-light p-2 d-md-none gradient-bg bg-info bg-opacity-10 border border-2 border-info border-start-0 rounded-end text-light"
-          type="button"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasNav"
-          aria-controls="offcanvasNav"
+          className="menu-toggle"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle navigation"
+          aria-expanded={menuOpen}
         >
-          <FontAwesomeIcon
-            icon={faBars}
-            style={{ background: 'none', fontSize: '30px' }}
-          />
+          {menuOpen ? <FiX /> : <FiMenu />}
         </button>
 
-        <div className="container-list d-none d-md-block">
-          <ul className="d-flex gap-4 m-0 p-0" style={{ listStyle: 'none' }}>
-            <li>
-              <Link className="nav-link text-blue" to="/">
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link className="nav-link text-blue" to="/about">
-                About Me
-              </Link>
-            </li>
-            <li>
-              <button
-                onClick={goToProjects}
-                className="nav-link text-blue bg-transparent border-0 p-0"
-                style={{ cursor: 'pointer' }}
-              >
-                Projects
-              </button>
-            </li>
-            <li>
-              <Link className="nav-link text-blue" to="/contact">
-                Contact
-              </Link>
-            </li>
-          </ul>
-        </div>
+        <div className={`nav-content ${menuOpen ? 'is-open' : ''}`}>
+          <div className="nav-links">
+            <Link className={location.pathname === '/' ? 'active' : ''} to="/" onClick={() => setMenuOpen(false)}>Home</Link>
+            <Link className={location.pathname === '/about' ? 'active' : ''} to="/about" onClick={() => setMenuOpen(false)}>About</Link>
+            <button onClick={() => scrollHomeSection('projects')}>Projects</button>
+            <button onClick={() => scrollHomeSection('skills')}>Skills</button>
+            <Link className={location.pathname === '/contact' ? 'active' : ''} to="/contact" onClick={() => setMenuOpen(false)}>Contact</Link>
+          </div>
 
-        <div
-          className="offcanvas offcanvas-end"
-          tabIndex="-1"
-          id="offcanvasNav"
-          aria-labelledby="offcanvasNavLabel"
-        >
-          <div className="offcanvas-header">
-            <button
-              type="button"
-              className="btn-close text-close"
-              data-bs-dismiss="offcanvas"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div className="offcanvas-body">
-            <div className="container-list">
-              <ul
-                className="d-flex flex-column gap-3 m-0 p-0"
-                style={{ listStyle: 'none' }}
-              >
-                <li>
-                  <Link className="nav-link text-blue" to="/">
-                    Home
-                  </Link>
-                </li>
-                <li>
-                  <Link className="nav-link text-blue" to="/about">
-                    About Me
-                  </Link>
-                </li>
-                <li>
-                  <button
-                    onClick={goToProjects}
-                    className="nav-link text-blue bg-transparent border-0 p-0"
-                    style={{ cursor: 'pointer' }}
-                  >
-                    Projects
-                  </button>
-                </li>
-                <li>
-                  <Link className="nav-link text-blue" to="/contact">
-                    Contact
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
+          <button className="cv-button" type="button" title="Add your CV file to enable this download">
+            <FiDownload />
+            <span>Download CV</span>
+          </button>
         </div>
-      </div>
+      </nav>
     </header>
   );
 };
